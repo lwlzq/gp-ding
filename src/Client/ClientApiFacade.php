@@ -22,6 +22,6 @@ class ClientApiFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'ClientApi';
+        return ClientApi::class;
     }
 }
