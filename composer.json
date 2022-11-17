@@ -1,0 +1,21 @@
+{
+    "name": "gp/ding",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gp\\Ding\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "刘伟亮",
+            "email": "50298602+lwlzq@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "alibabacloud/dingtalk": "^1.4",
+        "guzzlehttp/guzzle": "^7.2"
+    }
+}
