@@ -1,7 +1,7 @@
 {
     "name": "liuweiliang/groupding",
     "type": "library",
-    "description": "部分钉官方SDK再次封装，更加方便开发好用，并且文档更加傻瓜式好用 😂",
+    "description": "部分钉官方SDK再次封装，更加方便开发，并且文档很傻瓜式的好用 😂",
     "license": "MIT",
     "autoload": {
         "psr-4": {
