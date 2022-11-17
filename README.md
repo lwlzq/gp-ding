@@ -4,6 +4,39 @@
 For Laravel >= 5.8 
     PHP >= 7.4
 ```
+
+```
+1.composer require liuweiliang/groupding
+
+2.config/app/php
+
+    providers[
+        Gp\Ding\DingDing\DingServiceProvider::class
+    ]
+    
+    aliases[
+        'Api'=> \Gp\Ding\Client\ClientApiFacade::class, 
+    ]
+    
+3.php artisan vendor:publish
+```
+![img.png](img.png)
+
+```
+4.选择对应的服务发布 如上图 就输入 1
+
+5.在 /config/logging.php 内 追加 如下配置 
+
+     'ding'=>[
+            'driver' => 'daily',
+            'path' => storage_path('logs/ding.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 7,
+     ],
+     
+6.执行 php artisan config:clear
+```
+
 ### 部分 API 实现 
 ```     
     生成 access_token
@@ -50,15 +83,7 @@ For Laravel >= 5.8
      )
      
 ///////////////////////////// 需要先手动(或自动 目前后端没有自动)在群里 更多酷应用 -> 启动机器人后方可使用////////////////////////////////////////////
-     应在 /config/logging.php 内 追加 如下配置 后 执行 php artisan config:clear
-     
-     'ding'=>[
-            'driver' => 'daily',
-            'path' => storage_path('logs/ding.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 7,
-     ],
-     
+      
      普通卡片
      Gp\Ding\DingDing\DingCard::main(
         string $cardTemplateId = '',模板id 钉后台自找
