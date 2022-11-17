@@ -107,7 +107,7 @@ class ClientApiResponse extends Response
                 case 403:
                     throw new AuthorizationException($exception->getMessage());
                 case 404:
-                    throw new NotFoundHttpException($exception->getMessage(), $e);
+                    throw new NotFoundHttpException($exception->getMessage(), $exception);
                 default:
                     throw new HttpException($exception->getCode(), $exception->getMessage(), $exception);
             }
