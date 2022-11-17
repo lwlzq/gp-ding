@@ -26,8 +26,12 @@ use Illuminate\Support\Str;
 class DingCard
 {
     /**
-     * 使用 Token 初始化账号Client
-     * @return Dingtalk Client
+     * @FunctionName:
+     * @Description:Token 初始化账号Client
+     * @Author: liuweiliang
+     * @CreateDate: 2022/11/17 14:12
+     * @UpdateDate: 2022/11/17 14:12 By liuweiliang
+     * @return Dingtalk
      */
     public static function createClient()
     {
@@ -38,8 +42,18 @@ class DingCard
     }
 
     /**
-     * @param string[] $args
-     * @return void
+     * @FunctionName:
+     * @Description:
+     * @Author: liuweiliang
+     * @CreateDate: 2022/11/17 14:22
+     * @UpdateDate: 2022/11/17 14:22 By liuweiliang
+     * @param string $cardTemplateId
+     * @param string $openConversationId
+     * @param array $receiverUserIdList
+     * @param string $outTrackId
+     * @param string $robotCode
+     * @param array $data
+     * @param array $atOpenIds
      */
     public static function main(
         string $cardTemplateId = '',
@@ -58,23 +72,23 @@ class DingCard
         $cardOptions = new cardOptions([
             "supportForward" => true
         ]);
-        $atOpenIds = ['175548342820844423' => '陈体顺','116264463320844567'=>'33'];
+
         $privateDataValueKeyCardMediaIdParamMap = [
-            "title" => "title1"
+            "key" => "value"
         ];
         $privateDataValueKeyCardParamMap = [
-            "butddton" => "hello"
+            "key" => "value"
         ];
         $privateDataValueKey = new PrivateDataValue([
             "cardParamMap" => $privateDataValueKeyCardParamMap,
             "cardMediaIdParamMap" => $privateDataValueKeyCardMediaIdParamMap
         ]);
         $privateData = [
-            "16635583079518404" => $privateDataValueKey
+            "dingId" => $privateDataValueKey
         ];
         $cardDataCardMediaIdParamMap = $data;
         $cardDataCardParamMap = [
-            "desc" => "https://www.baidu.com"
+            "key" => "value"
         ];
         $cardData = new cardData([
             "cardParamMap" => $cardDataCardParamMap,
@@ -87,7 +101,7 @@ class DingCard
             "outTrackId" => $outTrackId ?? microtime(true) . Str::uuid(),
             "robotCode" => $robotCode,
             "conversationType" => 1,
-            "callbackRouteKey" => $callbackRouteKey ?? 'http://127.0.0.1:8000/api/aaa',
+            "callbackRouteKey" => $callbackRouteKey ?? '',
             "cardData" => $cardData,
             "privateData" => $privateData,
             "chatBotId" => $chatBotId ?? '',
@@ -96,7 +110,6 @@ class DingCard
             "cardOptions" => $cardOptions,
             "pullStrategy" => false
         ]);
-//        dd($sendInteractiveCardRequest);
 
         try {
             $client->sendInteractiveCardWithOptions($sendInteractiveCardRequest, $sendInteractiveCardHeaders, new RuntimeOptions([]));

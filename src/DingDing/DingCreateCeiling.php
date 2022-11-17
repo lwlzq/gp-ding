@@ -47,7 +47,7 @@ class DingCreateCeiling
      * @param string $outTrackId
      * @param string $robotCode
      * @param array $data
-     * @throws ServiceException
+     * @throws BadRequestHttpException
      */
     public static function main(
         string $cardTemplateId = '',
@@ -62,10 +62,10 @@ class DingCreateCeiling
         $interactiveCardCreateInstanceHeaders = new InteractiveCardCreateInstanceHeaders([]);
         $interactiveCardCreateInstanceHeaders->xAcsDingtalkAccessToken = DingTalkService::getAccessToken();
         $privateDataValueKeyCardMediaIdParamMap = [
-            "bp" => "1"
+            "key" => "value"
         ];
         $privateDataValueKeyCardParamMap = [
-            "bp" => "2"
+            "key" => "value"
         ];
         $privateDataValueKey = new PrivateDataValue([
             "cardParamMap" => $privateDataValueKeyCardParamMap,
@@ -75,32 +75,26 @@ class DingCreateCeiling
             "privateDataValueKey" => $privateDataValueKey
         ];
         $cardDataCardMediaIdParamMap = [
-            "updated_at" => $data['updated_at']
+            "key" => "value"
         ];
         $cardDataCardParamMap = $data;
-//            [
-//            "tem" => $tem ?? '36度',
-//            "bp" => $bp ?? '血压',
-//            "breath" => $breath ?? '呼吸',
-//            'rate' => $rate ?? '心率',
-//        ];
         $cardData = new cardData([
             "cardParamMap" => $cardDataCardParamMap,
             "cardMediaIdParamMap" => $cardDataCardMediaIdParamMap
         ]);
         $interactiveCardCreateInstanceRequest = new InteractiveCardCreateInstanceRequest([
-            "cardTemplateId" => $cardTemplateId,//"ecd6cb24-8588-401f-8ddd-1ba847002bb8",
-            "openConversationId" => $openConversationId,//"cidzhgBYqlRIFSmKXXyxP94Fg==",
-            "receiverUserIdList" => $receiverUserIdList,//['16635583079518404','083726034927687023'],
-            "outTrackId" => $outTrackId,//"ggg",
-            "robotCode" => $robotCode,//"dingb42lr523h4g44nio",
+            "cardTemplateId" => $cardTemplateId,
+            "openConversationId" => $openConversationId,
+            "receiverUserIdList" => $receiverUserIdList,
+            "outTrackId" => $outTrackId,
+            "robotCode" => $robotCode,
             "conversationType" => 1,
-//            "callbackRouteKey" => "faxxxx",
+            "callbackRouteKey" => "",
             "cardData" => $cardData,
-//            "privateData" => $privateData,
-//            "chatBotId" => "robotCode",
-//            "userIdType" => 1,
-//            "pullStrategy" => false
+            "privateData" => $privateData,
+            "chatBotId" => "robotCode",
+            "userIdType" => 1,
+            "pullStrategy" => false
         ]);
         try {
             $client->interactiveCardCreateInstanceWithOptions($interactiveCardCreateInstanceRequest, $interactiveCardCreateInstanceHeaders, new RuntimeOptions([]));
