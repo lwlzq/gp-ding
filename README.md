@@ -7,9 +7,14 @@ For
 ```
 
 ```
-1.composer require liuweiliang/groupding
+1.env 追加
+    DING_APP_KEY
+    DING_APP_SECRET
 
-2.config/app/php
+    
+2.composer require liuweiliang/groupding
+
+3.config/app/php
 
     providers[
         Gp\Ding\DingDing\DingServiceProvider::class
@@ -19,13 +24,13 @@ For
         'Api'=> \Gp\Ding\Client\ClientApiFacade::class, 
     ]
     
-3.php artisan vendor:publish
+4.php artisan vendor:publish
 ```
 ![img.png](img.png)
 ```
-4.选择对应的服务发布 如上图 就输入 1
+5.选择对应的服务发布 如上图 就输入 1
 
-5.在 /config/logging.php 内 追加 如下配置 
+6.在 /config/logging.php 内 追加 如下配置 
 
      'ding'=>[
             'driver' => 'daily',
@@ -34,7 +39,7 @@ For
             'days' => 7,
      ],
      
-6.执行 php artisan config:clear
+7.执行 php artisan config:clear
 ```
 
 ### 部分 API 实现 
