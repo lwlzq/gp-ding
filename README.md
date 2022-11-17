@@ -1,7 +1,8 @@
 # gp-ding
-> 在 钉钉 官方 SDK 基础上进行封装，简便使用
+> 在钉钉官方SDK基础上进行封装,简便使用,本SDK仅仅支持 laravel5.8 或 更高版本框架
 ```
-For Laravel >= 5.8 
+For 
+    Laravel >= 5.8 
     PHP >= 7.4
 ```
 
@@ -53,7 +54,7 @@ For Laravel >= 5.8
             string $user_ids = '',用户dingId
             string $template_id = '',创建群模板Id 钉后台自找
             string $title = '',群名称
-            string $uuid = '',唯一标识 推荐 ceil((microtime(true) * 1000)) . Str::uuid(),
+            string $uuid = '',唯一标识 推荐 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid(),
             string $icon = '',icon
             int    $show_history_type = 1,是否可以查看群聊天记录 1：可查看 ，，0：不可查看
             int    $searchable = 1,群是否可以被搜索 1不可 ，，0可以
@@ -100,7 +101,7 @@ For Laravel >= 5.8
         string $cardTemplateId = '',模板id 钉后台自找
         string $openConversationId = '',群id
         array  $receiverUserIdList = [],可以看到该模板的用户钉id
-        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Str::uuid()
+        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid()
         string $robotCode = '',机器人编码 钉后台自找
         array $data = [],卡片变量数据 根据钉后台卡片模板内 变量编写
      )
@@ -109,7 +110,7 @@ For Laravel >= 5.8
      Gp\Ding\DingDing\DingCreateCeiling::main(
         string $openConversationId = '',群id
         array $receiverUserIdList = [],可以看到该模板的用户钉id
-        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Str::uuid()
+        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid()
         string $coolAppCode = '',应用编码 钉后台自找
         int $expiredTime = 0,过期时间
         string $robotCode = ''机器人编码 钉后台自找
