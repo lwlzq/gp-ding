@@ -21,7 +21,6 @@ For Laravel >= 5.8
 3.php artisan vendor:publish
 ```
 ![img.png](img.png)
-
 ```
 4.选择对应的服务发布 如上图 就输入 1
 
