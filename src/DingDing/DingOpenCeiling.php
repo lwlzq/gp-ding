@@ -11,6 +11,7 @@ use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\TopboxOpenHeaders;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\TopboxOpenRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Class DingOpenCeiling

@@ -13,6 +13,7 @@ use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\PrivateDataValue;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\InteractiveCardCreateInstanceRequest\cardData;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\InteractiveCardCreateInstanceRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Class DingCreateCeiling

@@ -11,6 +11,7 @@ use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\Dingtalk\Vexclusive_1_0\Models\SendPhoneDingHeaders;
 use AlibabaCloud\SDK\Dingtalk\Vexclusive_1_0\Models\SendPhoneDingRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Class DingPhone
