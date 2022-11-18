@@ -39,9 +39,9 @@ class DingTalkService implements DingTalk
                 ->query(["appkey" => config('ding.app_key'), 'appsecret' => config('ding.app_secret')])
                 ->run()
                 ->getData();
-            Cache::set(config('app.name') . '_access_token', $data['access_token'], $data['expires_in']);
+            Cache::set('ding_ding_access_token', $data['access_token'], $data['expires_in']);
         }
-        return Cache::get(config('app.name') . '_access_token');
+        return Cache::get('ding_ding_access_token');
     }
 
     /**
