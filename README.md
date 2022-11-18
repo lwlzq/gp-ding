@@ -14,7 +14,7 @@ For
     
 2.composer require liuweiliang/groupding
 
-3.config/app/php
+3.config/app.php
 
     providers[
         Gp\Ding\DingDing\DingServiceProvider::class
@@ -26,7 +26,7 @@ For
     
 4.php artisan vendor:publish
 ```
-![img.png](img.png)
+![img.png](img.png)此处有图
 ```
 5.选择对应的服务发布 如上图 就输入 1
 
