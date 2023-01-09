@@ -14,13 +14,14 @@ use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\PrivateDataValue;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\SendInteractiveCardRequest\cardData;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\SendInteractiveCardRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use Gp\Ding\Contracts\DingUri;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
 /**
  * @Class DingCard
- * @Description:普通卡片
+ * @Description:普通发送卡片到群
  * @CreateDate: 2022/10/26 18:01
  * @UpdateDate: 2022/10/26 18:01 By liuweiliang
  */
@@ -48,13 +49,21 @@ class DingCard
      * @Author: liuweiliang
      * @CreateDate: 2022/11/17 14:22
      * @UpdateDate: 2022/11/17 14:22 By liuweiliang
-     * @param string $cardTemplateId
-     * @param string $openConversationId
-     * @param array $receiverUserIdList
-     * @param string $outTrackId
-     * @param string $robotCode
-     * @param array $data
-     * @param array $atOpenIds
+     * @param string $cardTemplateId 卡片id
+     * @param string $openConversationId 群id
+     * @param array $receiverUserIdList 可以查看卡片的用户的钉id
+     * @param string $outTrackId 唯一标识
+     * @param string $robotCode 机器人code
+     * @param string $callbackRouteKey 回调地址
+     * @param array $privateDataValueKeyCardMediaIdParamMap 私有的 卡片模板内容替换参数，多媒体类型
+     * @param array $privateDataValueKeyCardParamMap 私有的 卡片模板内容替换参数，普通文本类型
+     * @param array $cardDataCardMediaIdParamMap 公共的 卡片模板内容替换参数，多媒体类型。
+     * @param array $cardDataCardParamMap 公共的 卡片模板内容替换参数，普通文本类型。
+     * @param array $atOpenIds @的人
+     * @param int $conversationType 0单聊 1群聊
+     * @param int $userIdType userid模式 unionId模式
+     * @param bool $pullStrategy true 开启卡片纯拉模式   false 不开启卡片纯拉模式
+
      */
     public static function main(
         string $cardTemplateId = '',
@@ -62,8 +71,15 @@ class DingCard
         array  $receiverUserIdList = [],
         string $outTrackId = '',
         string $robotCode = '',
-        array  $data = [],
-        array  $atOpenIds = []
+        string $callbackRouteKey = '',
+        array  $privateDataValueKeyCardMediaIdParamMap = [],
+        array  $atOpenIds = [],
+        array  $privateDataValueKeyCardParamMap = [],
+        array  $cardDataCardMediaIdParamMap = [],
+        array  $cardDataCardParamMap = [],
+        int    $conversationType = DingUri::OPEN,
+        int    $userIdType = DingUri::OPEN,
+        bool   $pullStrategy = false
 
     )
     {
@@ -73,49 +89,44 @@ class DingCard
         $cardOptions = new cardOptions([
             "supportForward" => true
         ]);
-
-        $privateDataValueKeyCardMediaIdParamMap = [
-            "key" => "value"
-        ];
-        $privateDataValueKeyCardParamMap = [
-            "key" => "value"
-        ];
+        $atOpenIds = empty($atOpenIds) ? ["key" => "test"] : $atOpenIds;
+        $privateDataValueKeyCardMediaIdParamMap = empty($privateDataValueKeyCardMediaIdParamMap) ? ["key" => "test"] : $privateDataValueKeyCardMediaIdParamMap;
+        $privateDataValueKeyCardParamMap = empty($privateDataValueKeyCardParamMap) ? ["key" => "test"] : $privateDataValueKeyCardParamMap;
         $privateDataValueKey = new PrivateDataValue([
             "cardParamMap" => $privateDataValueKeyCardParamMap,
             "cardMediaIdParamMap" => $privateDataValueKeyCardMediaIdParamMap
         ]);
         $privateData = [
-            "dingId" => $privateDataValueKey
+            "privateDataValueKey" => $privateDataValueKey
         ];
-        $cardDataCardMediaIdParamMap = $data;
-        $cardDataCardParamMap = [
-            "key" => "value"
-        ];
+        $cardDataCardMediaIdParamMap = empty($cardDataCardMediaIdParamMap) ? ["key" => "test"] : $cardDataCardMediaIdParamMap;
+        $cardDataCardParamMap = empty($cardDataCardParamMap) ? ["key" => "test"] : $cardDataCardParamMap;
         $cardData = new cardData([
             "cardParamMap" => $cardDataCardParamMap,
             "cardMediaIdParamMap" => $cardDataCardMediaIdParamMap
         ]);
+
         $sendInteractiveCardRequest = new SendInteractiveCardRequest([
             "cardTemplateId" => $cardTemplateId,
             "openConversationId" => $openConversationId,
             "receiverUserIdList" => array_values($receiverUserIdList),
-            "outTrackId" => $outTrackId ?? microtime(true) . Str::uuid(),
+            "outTrackId" => $outTrackId ?? DingTalkService::outTrackId(),
             "robotCode" => $robotCode,
-            "conversationType" => 1,
+            "conversationType" => $conversationType,
             "callbackRouteKey" => $callbackRouteKey ?? '',
             "cardData" => $cardData,
             "privateData" => $privateData,
             "chatBotId" => $chatBotId ?? '',
-            "userIdType" => 1,
+            "userIdType" => $userIdType,
             "atOpenIds" => $atOpenIds,
             "cardOptions" => $cardOptions,
-            "pullStrategy" => false
+            "pullStrategy" => $pullStrategy
         ]);
 
         try {
             $client->sendInteractiveCardWithOptions($sendInteractiveCardRequest, $sendInteractiveCardHeaders, new RuntimeOptions([]));
         } catch (Exception $err) {
-            \Log::channel('ding')->error('钉普通卡片错误',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
+            \Log::channel('ding')->error('钉普通卡片错误', ['message' => $err->getMessage(), 'line' => $err->getLine(), 'file' => $err->getFile()]);
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }

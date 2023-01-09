@@ -16,9 +16,6 @@ class DingServiceProvider extends ServiceProvider
 {
     public function register()
     {
-//        $this->app->singleton('test', function () {
-//            return new Test();
-//        });
     }
 
     public function boot()

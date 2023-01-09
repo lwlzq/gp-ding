@@ -38,8 +38,8 @@ class DingPhone {
      * @Author: liuweiliang
      * @CreateDate: 2022/11/16 10:44
      * @UpdateDate: 2022/11/16 10:44 By liuweiliang
-     * @param array $user_ids
-     * @param string $content
+     * @param array $user_ids 钉id
+     * @param string $content 钉内容
      */
     public static function main(array $user_ids = [], string $content = ''){
         $client = self::createClient();
@@ -54,7 +54,6 @@ class DingPhone {
         }
         catch (Exception $err) {
             \Log::channel('ding')->error('钉电话',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
-
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }

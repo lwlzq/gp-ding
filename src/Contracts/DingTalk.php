@@ -39,40 +39,48 @@ interface DingTalk
      * @Author: liuweiliang
      * @CreateDate: 2022/10/24 15:00
      * @UpdateDate: 2022/10/24 15:00 By liuweiliang
-     * @param string $access_token
      * @param string $name 群名称
      * @param string $owner 群主id
-     * @param array $useridlist 群成员id
-     * @param int $showHistoryType 是否可以查看群聊天记录 1：可查看 ，，0：不可查看
+     * @param array $userid_list 群成员id
+     * @param int $show_history_type 是否可以查看群聊天记录 1：可查看 ，，0：不可查看
      * @param int $searchable 群是否可以被搜索 1不可 ，，0可以
-     * @param int $validationType 入群是否需要验证：0不需 。。1需要
-     * @param $mentionAllAuthority @all 使用范围  1仅群主可@all，，，0所有人可以
-     * @param int $managementType 群管理类型：0所有人，，， 1群主
-     * @param int $chatBannedType 是否开启群禁言：0不禁言，，，1禁言
+     * @param int $validation_type 入群是否需要验证：0不需 。。1需要
+     * @param $mention_all_authority @all 使用范围  1仅群主可@all，，，0所有人可以
+     * @param int $management_type 群管理类型：0所有人，，， 1群主
+     * @param int $chat_banned_type 是否开启群禁言：0不禁言，，，1禁言
      * @return array
      */
-    public static function createChat(string $name = '', string $owner = '', array $useridlist = [], int $showHistoryType = 1, int $searchable = 1, int $validationType = 0, $mentionAllAuthority = 0, int $managementType = 1, int $chatBannedType = 0): array;
+    public static function createChat(
+        string $name = '',
+        string $owner = '',
+        array $userid_list = [],
+        int $show_history_type = DingUri::DEFAULT,
+        int $searchable = DingUri::OPEN,
+        int $validation_type = DingUri::DEFAULT,
+        int $mention_all_authority = DingUri::DEFAULT,
+        int $management_type = DingUri::OPEN,
+        int $chat_banned_type = DingUri::DEFAULT
+    ): array;
 
 
     /**
      * @FunctionName:
-     * @Description:场景群
+     * @Description:创建场景群
      * @Author: liuweiliang
      * @CreateDate: 2022/10/25 11:06
      * @UpdateDate: 2022/10/25 11:06 By liuweiliang
-     * @param string $access_token
-     * @param string $template_id
-     * @param string $title
-     * @param string $owner_user_id
-     * @param string $user_ids
-     * @param int $show_history_type
-     * @param int $searchable
-     * @param int $validation_type
-     * @param int $mention_all_authority
-     * @param int $management_type
-     * @param string $uuid
-     * @param string $icon
-     * @param int $chat_banned_type
+     * @param string $template_id 场景群模板
+     * @param string $title 群名称
+     * @param string $owner_user_id 群主钉id
+     * @param string $user_ids 群内用户钉id
+     * @param int $show_history_type 是否可以查看群聊天记录 1：可查看 ，，0：不可查看
+     * @param int $searchable 群是否可以被搜索 1不可 ，，0可以
+     * @param int $validation_type 入群是否需要验证：0不需 。。1需要
+     * @param int $mention_all_authority @all 使用范围  1仅群主可@all，，，0所有人可以
+     * @param int $management_type 群管理类型：0所有人，，， 1群主
+     * @param string $uuid 唯一标识
+     * @param string $icon 群icon
+     * @param int $chat_banned_type 是否开启群禁言：0不禁言，，，1禁言
      * @return array
      */
     public static function createSceneChat(
@@ -82,12 +90,12 @@ interface DingTalk
         string $title = '',
         string $uuid = '',
         string $icon = '',
-        int    $show_history_type = 1,
-        int    $searchable = 1,
-        int    $validation_type = 0,
-        int    $mention_all_authority = 0,
-        int    $management_type = 1,
-        int    $chat_banned_type = 0
+        int    $show_history_type = DingUri::OPEN,
+        int    $searchable = DingUri::OPEN,
+        int    $validation_type = DingUri::DEFAULT,
+        int    $mention_all_authority = DingUri::DEFAULT,
+        int    $management_type = DingUri::OPEN,
+        int    $chat_banned_type = DingUri::DEFAULT
     ): array;
 
 
@@ -101,22 +109,28 @@ interface DingTalk
      * @param string $user_ids 用户id
      * @return array
      */
-    public static function storeChat(
-        string $open_conversation_id = '',
-        string $user_ids = '',
-    ): array;
-
-    public static function getJsApiTicket():array;
+    public static function storeChat(string $open_conversation_id = '', string $user_ids = '',): array;
 
 
     /**
      * @FunctionName:
-     * @Description:免登
+     * @Description:
      * @Author: liuweiliang
-     * @CreateDate: 2022/11/9 18:50
-     * @UpdateDate: 2022/11/9 18:50 By liuweiliang
-     * @param string $code
+     * @CreateDate: 2023/1/9 11:33
+     * @UpdateDate: 2023/1/9 11:33 By liuweiliang
      * @return array
      */
-    public static function noLoginByCode(string $code = ''):array;
+    public static function getJsApiTicket():array;
+
+
+    /**
+     * @FunctionName:outTrackId
+     * @Description:群唯一outTrackId
+     * @Author: liuweiliang
+     * @CreateDate: 2023/1/9 11:42
+     * @UpdateDate: 2023/1/9 11:42 By liuweiliang
+     * @return string
+     */
+    public static function outTrackId():string;
+
 }

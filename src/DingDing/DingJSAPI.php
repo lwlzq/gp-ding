@@ -29,6 +29,7 @@ class DingJSAPI
         $data['signature'] = self::getJsSignature($data);
         $data['agent_id'] = config('dingding.emergency_coordination.agent_id');
         $data['corp_id'] = config('dingding.emergency_coordination.corp_id');
+        $data['jsApiList'] = ['biz.chat.toConversationByOpenConversationId'];
         return $data;
     }
 

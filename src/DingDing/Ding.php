@@ -45,7 +45,7 @@ class Ding
      * @param string $content
      * @param string $access_token
      */
-    public static function ding(array $user_ids = [], string $content = '')
+    public static function main(array $user_ids = [], string $content = '')
     {
         $client = self::createClient();
         $sendAppDingHeaders = new SendAppDingHeaders([]);

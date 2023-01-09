@@ -13,6 +13,7 @@ use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\PrivateDataValue;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\InteractiveCardCreateInstanceRequest\cardData;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\InteractiveCardCreateInstanceRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use Gp\Ding\Contracts\DingUri;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -40,34 +41,47 @@ class DingCreateCeiling
      * @FunctionName:
      * @Description:
      * @Author: liuweiliang
-     * @CreateDate: 2022/11/16 10:50
-     * @UpdateDate: 2022/11/16 10:50 By liuweiliang
+     * @CreateDate: 2023/1/9 15:50
+     * @UpdateDate: 2023/1/9 15:50 By liuweiliang
      * @param string $cardTemplateId
      * @param string $openConversationId
+     * @param string $callbackRouteKey
      * @param array $receiverUserIdList
      * @param string $outTrackId
      * @param string $robotCode
-     * @param array $data
-     * @throws BadRequestHttpException
+     * @param string $chatBotId
+     * @param array $cardDataCardParamMap
+     * @param array $privateDataValueKeyCardMediaIdParamMap
+     * @param array $privateDataValueKeyCardParamMap
+     * @param array $cardDataCardMediaIdParamMap
+     * @param int $conversationType
+     * @param int $userIdType
+     * @param bool $pullStrategy
      */
     public static function main(
         string $cardTemplateId = '',
         string $openConversationId = '',
+        string $callbackRouteKey = '',
         array  $receiverUserIdList = [],
         string $outTrackId = '',
         string $robotCode = '',
-        array $data = [],
+        string $chatBotId = '',
+        array  $cardDataCardParamMap = [],
+        array  $privateDataValueKeyCardMediaIdParamMap = [],
+        array  $privateDataValueKeyCardParamMap = [],
+        array  $cardDataCardMediaIdParamMap = [],
+        int    $conversationType = DingUri::OPEN, //会话类型： - 1：群聊 - 2：单聊助手
+        int    $userIdType = DingUri::OPEN,
+        bool   $pullStrategy = false
     )
     {
         $client = self::createClient();
         $interactiveCardCreateInstanceHeaders = new InteractiveCardCreateInstanceHeaders([]);
         $interactiveCardCreateInstanceHeaders->xAcsDingtalkAccessToken = DingTalkService::getAccessToken();
-        $privateDataValueKeyCardMediaIdParamMap = [
-            "key" => "value"
-        ];
-        $privateDataValueKeyCardParamMap = [
-            "key" => "value"
-        ];
+
+        $privateDataValueKeyCardMediaIdParamMap = empty($privateDataValueKeyCardMediaIdParamMap) ? ["key" => "test"] : $privateDataValueKeyCardMediaIdParamMap;
+        $privateDataValueKeyCardParamMap = empty($privateDataValueKeyCardParamMap) ? ["key" => "test"] : $privateDataValueKeyCardParamMap;
+
         $privateDataValueKey = new PrivateDataValue([
             "cardParamMap" => $privateDataValueKeyCardParamMap,
             "cardMediaIdParamMap" => $privateDataValueKeyCardMediaIdParamMap
@@ -75,10 +89,9 @@ class DingCreateCeiling
         $privateData = [
             "privateDataValueKey" => $privateDataValueKey
         ];
-        $cardDataCardMediaIdParamMap = [
-            "key" => "value"
-        ];
-        $cardDataCardParamMap = $data;
+
+        $cardDataCardMediaIdParamMap = empty($cardDataCardMediaIdParamMap) ? ["key" => "test"] : $cardDataCardMediaIdParamMap;
+
         $cardData = new cardData([
             "cardParamMap" => $cardDataCardParamMap,
             "cardMediaIdParamMap" => $cardDataCardMediaIdParamMap
@@ -89,18 +102,18 @@ class DingCreateCeiling
             "receiverUserIdList" => $receiverUserIdList,
             "outTrackId" => $outTrackId,
             "robotCode" => $robotCode,
-            "conversationType" => 1,
-            "callbackRouteKey" => "",
+            "conversationType" => $conversationType,
+            "callbackRouteKey" => $callbackRouteKey,
             "cardData" => $cardData,
             "privateData" => $privateData,
-            "chatBotId" => "robotCode",
-            "userIdType" => 1,
-            "pullStrategy" => false
+            "chatBotId" => $chatBotId,
+            "userIdType" => $userIdType,
+            "pullStrategy" => $pullStrategy
         ]);
         try {
             $client->interactiveCardCreateInstanceWithOptions($interactiveCardCreateInstanceRequest, $interactiveCardCreateInstanceHeaders, new RuntimeOptions([]));
         } catch (Exception $err) {
-            Log::channel('ding')->error('钉创建吊顶错误',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
+            \Log::channel('ding')->error('钉创建吊顶错误', ['message' => $err->getMessage(), 'line' => $err->getLine(), 'file' => $err->getFile()]);
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }

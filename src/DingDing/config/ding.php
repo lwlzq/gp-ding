@@ -8,6 +8,6 @@
  */
 
 return [
-    'app_key' => env('DING_APP_KEY',''),
-    'app_secret' => env('DING_APP_SECRET',''),
+    'app_key' => env('DING_APP_KEY',''),//钉app_key
+    'app_secret' => env('DING_APP_SECRET',''),//钉app_secret
 ];
