@@ -20,7 +20,7 @@ use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
 
 /**
  * @Class DingUpdateCard
- * @Description:更新普通卡片 和 吊顶卡片
+ * @Description:更新卡片(吊顶卡片和普通卡片)
  * @CreateDate: 2022/10/26 18:01
  * @UpdateDate: 2022/10/26 18:01 By liuweiliang
  */

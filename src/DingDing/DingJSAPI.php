@@ -3,8 +3,10 @@
 namespace Gp\Ding\DingDing;
 
 
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateCardRequest\openDynamicDataConfig\dynamicDataSourceConfigs;
+
 /**
- * @Class DingJSAPI
+ * @Class DingJSAPI 免登录啥的
  * @Description: JSAPI
  * @CreateDate: 2022/10/24 13:45
  * @UpdateDate: 2022/10/24 13:45 By liuweiliang
@@ -23,6 +25,9 @@ class DingJSAPI
      */
     public static function jsapi(string $url): array
     {
+        if (empty($url)){
+            dd('url 参数不能为 空');
+        }
         $data['noncestr'] = md5(intval(microtime(true) * 10000));
         $data['timestamp'] = time();
         $data['url'] = urldecode($url);

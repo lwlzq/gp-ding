@@ -1,13 +1,21 @@
 <?php
 
 namespace Gp\Ding\DingDing;
-
+/**
+ * @Class DingCallbackCrypto
+ * @Description:事件校验类
+ * @CreateDate: 2023/1/9 17:41
+ * @UpdateDate: 2023/1/9 17:41 By liuweiliang
+ * ${PARAM_DOC}
+ * @return ${TYPE_HINT}
+ * ${THROWS_DOC}
+ */
 class DingCallbackCrypto
 {
     /**
-     * @param token          钉钉开放平台上，开发者设置的token
-     * @param encodingAesKey 钉钉开放台上，开发者设置的EncodingAESKey
-     * @param corpId         企业自建应用-事件订阅, 使用appKey
+     * @param string token          钉钉开放平台上，开发者设置的token
+     * @param string encodingAesKey 钉钉开放台上，开发者设置的EncodingAESKey
+     * @param string corpId         企业自建应用-事件订阅, 使用appKey
      *                       企业自建应用-注册回调地址, 使用corpId
      *                       第三方企业应用, 使用suiteKey
      */

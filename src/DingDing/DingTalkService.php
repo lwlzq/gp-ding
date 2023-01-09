@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 /**
  * @Class DingTalkService
- * @Description:钉的服务层
+ * @Description:钉的服务层 调用钉url
  * @CreateDate: 2022/10/24 13:45
  * @UpdateDate: 2022/10/24 13:45 By liuweiliang
  */
@@ -243,7 +243,7 @@ class DingTalkService implements DingTalk
             $res = $client->sendAsync($request)->wait();
             return $res->getBody();
         } catch (\Exception $exception) {
-            \Log::channel('client')->info(['message' => $exception->getMessage()]);
+            \Log::channel('client')->info('创建并启用场景群错误',['message' => $exception->getMessage()]);
         }
     }
 }

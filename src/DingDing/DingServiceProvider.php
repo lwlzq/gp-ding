@@ -12,6 +12,16 @@ namespace Gp\Ding\DingDing;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @Class DingServiceProvider
+ * @Description:钉服务提供者
+ * @CreateDate: 2023/1/9 17:42
+ * @UpdateDate: 2023/1/9 17:42 By liuweiliang
+ * ${PARAM_DOC}
+ * @return ${TYPE_HINT}
+ * ${THROWS_DOC}
+ */
+
 class DingServiceProvider extends ServiceProvider
 {
     public function register()

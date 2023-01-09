@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Class DingCreateCeiling
- * @Description:创建 吊顶 实例
+ * @Description:酷应用创建吊顶
  * @CreateDate: 2022/10/28 09:28
  * @UpdateDate: 2022/10/28 09:28 By liuweiliang
  */
@@ -49,8 +49,8 @@ class DingCreateCeiling
      * @param array $receiverUserIdList
      * @param string $outTrackId
      * @param string $robotCode
-     * @param string $chatBotId
      * @param array $cardDataCardParamMap
+     * @param string $chatBotId
      * @param array $privateDataValueKeyCardMediaIdParamMap
      * @param array $privateDataValueKeyCardParamMap
      * @param array $cardDataCardMediaIdParamMap
@@ -65,8 +65,8 @@ class DingCreateCeiling
         array  $receiverUserIdList = [],
         string $outTrackId = '',
         string $robotCode = '',
-        string $chatBotId = '',
         array  $cardDataCardParamMap = [],
+        string $chatBotId = '',
         array  $privateDataValueKeyCardMediaIdParamMap = [],
         array  $privateDataValueKeyCardParamMap = [],
         array  $cardDataCardMediaIdParamMap = [],

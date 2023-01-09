@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Class DingOpenCeiling
- * @Description:开启吊顶
+ * @Description:酷应用 开启吊顶
  * @CreateDate: 2022/10/26 18:01
  * @UpdateDate: 2022/10/26 18:01 By liuweiliang
  */
@@ -44,7 +44,7 @@ class DingOpenCeiling {
      * @param string $coolAppCode 应用code
      * @param int $expiredTime 过期时间
      * @param string $robotCode 机器人code
-     * @throws ServiceException
+     * @throws BadRequestHttpException
      */
     public static function main(
         string $openConversationId = '',

@@ -54,12 +54,12 @@ class DingCard
      * @param array $receiverUserIdList 可以查看卡片的用户的钉id
      * @param string $outTrackId 唯一标识
      * @param string $robotCode 机器人code
+     * @param array $cardDataCardParamMap 公共的 卡片模板内容替换参数，普通文本类型。
+     * @param array $cardDataCardMediaIdParamMap 公共的 卡片模板内容替换参数，多媒体类型。
+     * @param array $atOpenIds @的人
      * @param string $callbackRouteKey 回调地址
      * @param array $privateDataValueKeyCardMediaIdParamMap 私有的 卡片模板内容替换参数，多媒体类型
      * @param array $privateDataValueKeyCardParamMap 私有的 卡片模板内容替换参数，普通文本类型
-     * @param array $cardDataCardMediaIdParamMap 公共的 卡片模板内容替换参数，多媒体类型。
-     * @param array $cardDataCardParamMap 公共的 卡片模板内容替换参数，普通文本类型。
-     * @param array $atOpenIds @的人
      * @param int $conversationType 0单聊 1群聊
      * @param int $userIdType userid模式 unionId模式
      * @param bool $pullStrategy true 开启卡片纯拉模式   false 不开启卡片纯拉模式
@@ -71,12 +71,12 @@ class DingCard
         array  $receiverUserIdList = [],
         string $outTrackId = '',
         string $robotCode = '',
+        array  $cardDataCardParamMap = [],
+        array  $cardDataCardMediaIdParamMap = [],
+        array  $atOpenIds = [],
         string $callbackRouteKey = '',
         array  $privateDataValueKeyCardMediaIdParamMap = [],
-        array  $atOpenIds = [],
         array  $privateDataValueKeyCardParamMap = [],
-        array  $cardDataCardMediaIdParamMap = [],
-        array  $cardDataCardParamMap = [],
         int    $conversationType = DingUri::OPEN,
         int    $userIdType = DingUri::OPEN,
         bool   $pullStrategy = false
