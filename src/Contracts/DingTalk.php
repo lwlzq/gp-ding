@@ -135,7 +135,7 @@ interface DingTalk
 
     /**
      * @FunctionName:
-     * @Description:
+     * @Description:场景群 创建并启用吊顶
      * @Author: liuweiliang
      * @CreateDate: 2023/1/9 16:56
      * @UpdateDate: 2023/1/9 16:56 By liuweiliang

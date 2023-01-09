@@ -1,5 +1,7 @@
 # gp-ding
+
 > 在钉钉官方SDK基础上进行封装,简便使用,本SDK仅仅支持 laravel5.8 或 更高版本框架
+
 ```
 For 
     Laravel >= 5.8 
@@ -10,6 +12,10 @@ For
 1.env 追加
     DING_APP_KEY
     DING_APP_SECRET
+    
+    EVENT_TOKEN
+    EVENT_ASE_KEY
+    EVENT_KEY
 
     
 2.composer require liuweiliang/groupding
@@ -26,7 +32,9 @@ For
     
 4.php artisan vendor:publish
 ```
+
 ![img.png](img.png)此处有图
+
 ```
 5.选择对应的服务发布 如上图 就输入 1
 
@@ -42,7 +50,8 @@ For
 7.执行 php artisan config:clear
 ```
 
-### 部分 API 实现 
+### 部分 API 实现
+
 ```     
     生成 access_token
     \Gp\Ding\DingDing\DingTalkService::getAccessToken()
@@ -50,23 +59,14 @@ For
     通过手机号 获取 钉Id
     \Gp\Ding\DingDing\DingTalkService::getUserIdByMobile("手机号")
     
-    创建普通群 参数可到 本SDK 内自行匹配
-    \Gp\Ding\DingDing\DingTalkService::createChat()
+    创建普通群 具体参数 请进入SDK 内查看
+    \Gp\Ding\DingDing\DingTalkService::createChat(
+         .....
+    )
     
-    创建场景群
+    创建场景群 具体参数 请进入SDK 内查看
     \Gp\Ding\DingDing\DingTalkService::createSceneChat(
-            string $owner_user_id = '',群主dingId
-            string $user_ids = '',用户dingId
-            string $template_id = '',创建群模板Id 钉后台自找
-            string $title = '',群名称
-            string $uuid = '',唯一标识 推荐 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid(),
-            string $icon = '',icon
-            int    $show_history_type = 1,是否可以查看群聊天记录 1：可查看 ，，0：不可查看
-            int    $searchable = 1,群是否可以被搜索 1不可 ，，0可以
-            int    $validation_type = 0,入群是否需要验证：0不需 。。1需要
-            int    $mention_all_authority = 0, @all 使用范围  1仅群主可@all，，，0所有人可以
-            int    $management_type = 1,群管理类型：0所有人，，， 1群主
-            int    $chat_banned_type = 0,是否开启群禁言：0不禁言，，，1禁言
+           .....
     )
     
     向群内添加用户
@@ -75,49 +75,43 @@ For
     获取 JSAPI 的 Ticket
     \Gp\Ding\DingDing\DingTalkService::getJsApiTicket()
     
+    
+    // 钉一下 钉电话 是专属钉的功能
     钉一下
      Gp\Ding\DingDing\Ding::ding(
         array 钉id,
         string 内容
      )
      
-     钉电话
+     钉电话 记得关闭手机的拦截软件
      Gp\Ding\DingDing\DingPhone::ding(
         array 钉id,
         string 内容
      )
      
-///////////////////////////// 需要先手动(或自动)在群里 更多酷应用 -> 启动机器人后方可使用 (目前后端钉官方不支持自动开启酷应用机器人)////////////////////////////////////////////
+/////////////////////////////  场景群下的功能 具体参数 请进入SDK 内查看 ////////////////////////////////////////////
       
      普通卡片
      Gp\Ding\DingDing\DingCard::main(
-        string $cardTemplateId = '',模板id 钉后台自找
-        string $openConversationId = '',群id
-        array  $receiverUserIdList = [],可以看到该模板的用户钉id
-        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一
-        string $robotCode = '',机器人编码 钉后台自找
-        array  $data = [],卡片变量数据 根据钉后台卡片模板内 变量编写
-        array  $atOpenIds = [] @xxx 钉id
+        .....
      )
      
-     
-     创建吊顶卡片
-     Gp\Ding\DingDing\DingCreateCeiling::main(
-        string $cardTemplateId = '',模板id 钉后台自找
-        string $openConversationId = '',群id
-        array  $receiverUserIdList = [],可以看到该模板的用户钉id
-        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid()
-        string $robotCode = '',机器人编码 钉后台自找
-        array $data = [],卡片变量数据 根据钉后台卡片模板内 变量编写
+     更新卡片（包含吊顶）
+     Gp\Ding\DingDing\DingUpdateCard::main(
+        .....
      )
      
-     启动吊顶卡片
-     Gp\Ding\DingDing\DingCreateCeiling::main(
-        string $openConversationId = '',群id
-        array $receiverUserIdList = [],可以看到该模板的用户钉id
-        string $outTrackId = '',唯一标识 要考虑 高频请求下 唯一  推荐雪花id  或 ceil((microtime(true) * 1000)) . Illuminate\Support\Str::uuid()
-        string $coolAppCode = '',应用编码 钉后台自找
-        int $expiredTime = 0,过期时间
-        string $robotCode = ''机器人编码 钉后台自找
-     )
+     创建并启用吊顶
+      \Gp\Ding\DingDing\DingTalkService::createOpenCeiling(
+       .....
+      )
+     
+     //监听事件
+     $data = $this->request->input();
+     $crypt = new Gp\Ding\DingDing\DingCallbackCrypto(config('ding.event_token), config('ding.event_ase_key'), config('ding.event_key));
+     $text = $crypt->getDecryptMsg($data['msg_signature'], $data['timestamp'], $data['nonce'], $data['encrypt']);
+     
+     
+     return \response()->json(json_decode($crypt->getEncryptedMapDetail("success", $data['timestamp'], $data['nonce'])));
+
 ```
