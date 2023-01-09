@@ -133,4 +133,20 @@ interface DingTalk
      */
     public static function outTrackId():string;
 
+    /**
+     * @FunctionName:
+     * @Description:
+     * @Author: liuweiliang
+     * @CreateDate: 2023/1/9 16:56
+     * @UpdateDate: 2023/1/9 16:56 By liuweiliang
+     * @param string $ceiling_card_id 吊顶id
+     * @param string $open_conversation_id 群id
+     * @param string $out_track_id 唯一标识
+     * @param array $card_param_map 数据
+     * @param string $group_template_id
+     * @param int $conversation_type
+     * @return mixed
+     */
+    public static function createOpenCeiling(string $ceiling_card_id = '', string $open_conversation_id = '', string $out_track_id = '', array $card_param_map = [], string $group_template_id = '', int $conversation_type = DingUri::OPEN);
+
 }

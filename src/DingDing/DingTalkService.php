@@ -11,7 +11,9 @@
 namespace Gp\Ding\DingDing;
 use Gp\Ding\Contracts\DingTalk;
 use Gp\Ding\Contracts\DingUri;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
@@ -220,4 +222,28 @@ class DingTalkService implements DingTalk
         return ceil((microtime(true) * 10000)) . \Illuminate\Support\Str::uuid();
     }
 
+
+    public static function createOpenCeiling(string $ceiling_card_id = '', string $open_conversation_id = '', string $out_track_id = '', array $card_param_map = [], string $group_template_id = '', int $conversation_type = DingUri::OPEN)
+    {
+        try {
+            $client = new Client();
+            $headers = ['x-acs-dingtalk-access-token' => DingTalkService::getAccessToken(), 'Content-Type' => 'application/json'];
+            $body = [
+                "outTrackId" => $out_track_id,
+                'cardData' => [
+                    'cardParamMap' => json_encode($card_param_map)
+                ],
+                'conversationType' => $conversation_type,
+                "groupTemplateId" => $group_template_id,
+                "cardTemplateId" => $ceiling_card_id,
+                "openConversationId" => $open_conversation_id,
+            ];
+            $body = json_encode($body);
+            $request = new \GuzzleHttp\Psr7\Request('POST', 'https://api.dingtalk.com/v2.0/im/topBoxes', $headers, $body);
+            $res = $client->sendAsync($request)->wait();
+            return $res->getBody();
+        } catch (\Exception $exception) {
+            \Log::channel('client')->info(['message' => $exception->getMessage()]);
+        }
+    }
 }
