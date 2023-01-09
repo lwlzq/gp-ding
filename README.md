@@ -76,20 +76,18 @@ For
     \Gp\Ding\DingDing\DingTalkService::getJsApiTicket()
     
     
-    // 钉一下 钉电话 是专属钉的功能
-    钉一下
+    钉一下 ⚠️是专属钉的功能
      Gp\Ding\DingDing\Ding::ding(
         array 钉id,
         string 内容
      )
      
-     钉电话 记得关闭手机的拦截软件
+     钉电话 ⚠️是专属钉的功能  ⚠️记得关闭手机的拦截软件
      Gp\Ding\DingDing\DingPhone::ding(
         array 钉id,
         string 内容
      )
      
-/////////////////////////////  场景群下的功能 具体参数 请进入SDK 内查看 ////////////////////////////////////////////
       
      普通卡片
      Gp\Ding\DingDing\DingCard::main(
@@ -101,9 +99,9 @@ For
         .....
      )
      
-     创建并启用吊顶
+     创建并启用吊顶 场景群使用
       \Gp\Ding\DingDing\DingTalkService::createOpenCeiling(
-       .....
+        .....
       )
      
      //监听事件
