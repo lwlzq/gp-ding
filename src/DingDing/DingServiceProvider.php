@@ -31,8 +31,8 @@ class DingServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/ding.php' => config_path('ding.log'),
-            __DIR__ . '/log/ding.log' =>  storage_path('logs/ding.log'),
+            __DIR__ . '/config/ding.php' => config_path('ding.php'),
+            __DIR__ . '/logs/ding.log' =>  storage_path('logs/ding.log'),
         ]);
     }
 
