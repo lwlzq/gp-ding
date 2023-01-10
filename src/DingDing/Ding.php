@@ -47,6 +47,8 @@ class Ding
      */
     public static function main(array $user_ids = [], string $content = '')
     {
+        \Log::channel('ding')->error('钉一下aaa');
+
         $client = self::createClient();
         $sendAppDingHeaders = new SendAppDingHeaders([]);
         $sendAppDingHeaders->xAcsDingtalkAccessToken = DingTalkService::getAccessToken();
