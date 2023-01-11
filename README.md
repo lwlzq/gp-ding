@@ -40,12 +40,13 @@ For
 
 6.在 /config/logging.php 内 追加 如下配置 
 
-     'ding'=>[
+        'ding' => [
             'driver' => 'daily',
             'path' => storage_path('logs/ding.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 7,
-     ],
+            'permission' => 0664,
+        ],
      
 7.执行 php artisan config:clear
 ```
