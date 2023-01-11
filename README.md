@@ -30,15 +30,10 @@ For
         'Api'=> \Gp\Ding\Client\ClientApiFacade::class, 
     ]
     
-4.php artisan vendor:publish
-```
+4. php artisan vendor:publish --provider="Gp\Ding\DingDing\DingServiceProvider"
 
-![img.png](img.png)此处有图
 
-```
-5.选择对应的服务发布 如上图 就输入 1
-
-6.在 /config/logging.php 内 追加 如下配置 
+5.在 /config/logging.php 内 追加 如下配置 
 
         'ding' => [
             'driver' => 'daily',
@@ -48,7 +43,7 @@ For
             'permission' => 0664,
         ],
      
-7.执行 php artisan config:clear
+6.执行 php artisan config:clear
 ```
 
 ### 部分 API 实现
