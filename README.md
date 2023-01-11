@@ -15,9 +15,9 @@ For
     DING_APP_KEY
     DING_APP_SECRET
     
-    EVENT_TOKEN
-    EVENT_ASE_KEY
-    EVENT_KEY
+    DING_EVENT_TOKEN
+    DING_EVENT_ASE_KEY
+    DING_EVENT_KEY 
 
     
 2.composer require liuweiliang/groupding
