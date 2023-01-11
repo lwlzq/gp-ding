@@ -77,13 +77,13 @@ For
     
     
     钉一下 ⚠️是专属钉的功能
-     Gp\Ding\DingDing\Ding::ding(
+     Gp\Ding\DingDing\Ding::main(
         array 钉id,
         string 内容
      )
      
      钉电话 ⚠️是专属钉的功能  ⚠️记得关闭手机的拦截软件
-     Gp\Ding\DingDing\DingPhone::ding(
+     Gp\Ding\DingDing\DingPhone::main(
         array 钉id,
         string 内容
      )
