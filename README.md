@@ -66,7 +66,7 @@ For
     
     创建场景群 具体参数 请进入SDK 内查看
     \Gp\Ding\DingDing\DingTalkService::createSceneChat(
-           ....
+          ....
     )
     
     向群内添加用户
