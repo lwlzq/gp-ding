@@ -23,10 +23,12 @@ For
 3.config/app.php
 
     providers[
+        ...
         Gp\Ding\DingDing\DingServiceProvider::class
     ]
     
     aliases[
+        ...
         'Api'=> \Gp\Ding\Client\ClientApiFacade::class, 
     ]
     
@@ -87,17 +89,17 @@ For
       
      普通卡片
      Gp\Ding\DingDing\DingCard::main(
-        .....
+        ...
      )
      
      更新卡片（包含吊顶）
      Gp\Ding\DingDing\DingUpdateCard::main(
-        .....
+        ...
      )
      
      创建并启用吊顶 场景群使用
       \Gp\Ding\DingDing\DingTalkService::createOpenCeiling(
-        .....
+        ...
       )
      
      //监听事件
