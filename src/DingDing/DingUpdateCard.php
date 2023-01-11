@@ -106,7 +106,6 @@ class DingUpdateCard
             $client->updateInteractiveCardWithOptions($updateInteractiveCardRequest, $updateInteractiveCardHeaders, new RuntimeOptions([]));
         } catch (Exception $err) {
             Log::channel('ding')->error('钉普通卡片更新错误', ['message' => $err->getMessage(), 'line' => $err->getLine(), 'file' => $err->getFile()]);
-
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }
