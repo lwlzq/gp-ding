@@ -243,7 +243,7 @@ class DingTalkService implements DingTalk
             $res = $client->sendAsync($request)->wait();
             return $res->getBody();
         } catch (\Exception $exception) {
-            \Log::channel('client')->info('创建并启用场景群错误',['message' => $exception->getMessage()]);
+            Log::channel('client')->info('创建并启用场景群错误',['message' => $exception->getMessage()]);
         }
     }
 }

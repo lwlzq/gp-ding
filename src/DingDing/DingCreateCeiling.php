@@ -6,7 +6,7 @@ use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Dingtalk;
 use \Exception;
 use AlibabaCloud\Tea\Exception\TeaError;
 use AlibabaCloud\Tea\Utils\Utils;
-
+use Illuminate\Support\Facades\Log;
 use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\InteractiveCardCreateInstanceHeaders;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\PrivateDataValue;
@@ -113,7 +113,7 @@ class DingCreateCeiling
         try {
             $client->interactiveCardCreateInstanceWithOptions($interactiveCardCreateInstanceRequest, $interactiveCardCreateInstanceHeaders, new RuntimeOptions([]));
         } catch (Exception $err) {
-            \Log::channel('ding')->error('钉创建吊顶错误', ['message' => $err->getMessage(), 'line' => $err->getLine(), 'file' => $err->getFile()]);
+            Log::channel('ding')->error('钉创建吊顶错误', ['message' => $err->getMessage(), 'line' => $err->getLine(), 'file' => $err->getFile()]);
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }

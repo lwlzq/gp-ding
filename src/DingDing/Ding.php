@@ -10,6 +10,7 @@ use AlibabaCloud\Tea\Utils\Utils;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
 use Darabonba\OpenApi\Models\Config;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @Class Ding
@@ -47,7 +48,7 @@ class Ding
      */
     public static function main(array $user_ids = [], string $content = '')
     {
-        \Log::channel('ding')->error('钉一下aaa');
+        Log::channel('ding')->error('钉一下aaa');
 
         $client = self::createClient();
         $sendAppDingHeaders = new SendAppDingHeaders([]);
@@ -61,7 +62,7 @@ class Ding
         try {
             $client->sendAppDingWithOptions($sendAppDingRequest, $sendAppDingHeaders, new RuntimeOptions([]));
         } catch (\Exception $err) {
-            \Log::channel('ding')->error('钉一下',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
+            Log::channel('ding')->error('钉一下',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }

@@ -12,6 +12,7 @@ use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\TopboxOpenHeaders;
 use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\TopboxOpenRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @Class DingOpenCeiling
@@ -71,7 +72,7 @@ class DingOpenCeiling {
         try {
             $client->topboxOpenWithOptions($topboxOpenRequest, $topboxOpenHeaders, new RuntimeOptions([]));
         } catch (Exception $err) {
-            \Log::channel('ding')->error('钉开启吊顶错误',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
+            Log::channel('ding')->error('钉开启吊顶错误',['message'=>$err->getMessage(),'line'=>$err->getLine(),'file'=>$err->getFile()]);
             if (!($err instanceof TeaError)) {
                 $err = new TeaError([], $err->getMessage(), $err->getCode(), $err);
             }
