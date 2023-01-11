@@ -32,7 +32,6 @@ class DingServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config/ding.php' => config_path('ding.php'),
-            __DIR__ . '/logs/ding.log' =>  storage_path('logs/ding.log'),
         ]);
     }
 
